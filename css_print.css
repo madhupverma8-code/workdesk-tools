@@ -1,0 +1,201 @@
+/* ============================================================
+   WorkDesk Tools — Print Stylesheet
+   Sirf salary slip A4 print optimized (B&W / Low-Ink)
+============================================================ */
+
+@page {
+  size: A4;
+  margin: 8mm;
+}
+
+/* ================= SALARY SLIP (SCREEN + PRINT) ================= */
+.bw-slip {
+  background: #ffffff;
+  color: #111827;
+  border: 1.5px solid #111827;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 10px;
+  line-height: 1.35;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.bw-slip-head {
+  background: linear-gradient(90deg, #eef2ff, #f3f4f6 70%);
+  border-bottom: 1.5px solid #111827;
+  padding: 6px 8px;
+}
+
+.bw-slip-panel {
+  background: #fafafa;
+  border: 1px solid #4b5563;
+}
+
+.bw-slip-net {
+  background: linear-gradient(90deg, #d1fae5, #e5e7eb);
+  border-top: 1.5px solid #111827;
+  border-bottom: 1.5px solid #111827;
+  color: #111827;
+  padding: 5px 8px;
+}
+
+.bw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.5px;
+}
+
+.bw-table th,
+.bw-table td {
+  border: 1px solid #9ca3af;
+  padding: 3px 5px;
+  text-align: left;
+}
+
+.bw-table th {
+  background: #f3f4f6;
+  font-weight: 700;
+}
+
+.bw-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ================= A4 STAGE (OFFSCREEN) ================= */
+#pdfStage {
+  position: fixed;
+  left: -12000px;
+  top: 0;
+  width: 794px;
+  background: #ffffff;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.a4-sheet {
+  width: 794px;
+  height: 1123px;
+  background: #ffffff;
+  padding: 18px;
+  box-sizing: border-box;
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.a4-grid-1 { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.a4-grid-2 { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+.a4-grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+/* ================= PRINT MEDIA ================= */
+@media print {
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header,
+  nav,
+  #toastWrap,
+  #cartPanel,
+  #cartOverlay,
+  .no-print,
+  .cat-btn,
+  .cat-hint,
+  .cat-num,
+  #hrControls,
+  #hrProgressWrap,
+  .app-header,
+  button:not(.print-keep),
+  input[type="file"],
+  label.upload-box,
+  .upload-browse,
+  .btn-primary,
+  .btn-amber,
+  .btn-ghost,
+  .cart-btn,
+  .cart-badge {
+    display: none !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .category-view { display: none !important; }
+
+  #pdfStage {
+    position: static !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    z-index: auto !important;
+    pointer-events: auto !important;
+    background: #ffffff !important;
+  }
+
+  .a4-sheet {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 297mm !important;
+    page-break-after: always;
+    break-after: page;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: 8px !important;
+    background: #ffffff !important;
+  }
+
+  .a4-sheet:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .bw-slip {
+    border: 1px solid #000000 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bw-slip-head,
+  .bw-slip-net,
+  .bw-slip-panel,
+  .bw-table th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .bw-slip-net { background: #e5e7eb !important; }
+  .bw-slip-head { background: #f3f4f6 !important; }
+  .bw-slip-panel { background: #fafafa !important; }
+  .bw-table th { background: #e5e7eb !important; }
+
+  a { text-decoration: none; color: #000; }
+
+  * { box-shadow: none !important; text-shadow: none !important; }
+
+  .bw-table th, .bw-table td { border: 1px solid #000000 !important; }
+
+  .a4-grid-1 { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+  .a4-grid-2 { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+  .a4-grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+  .thin-scroll::-webkit-scrollbar { display: none; }
+  .thin-scroll { overflow: visible !important; }
+}
+
+/* ================= PREVIEW (ON-SCREEN) ================= */
+.slip-preview-wrap {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
